@@ -3,7 +3,7 @@ import { create } from "../controllers/tickets/creat.js"
 
 export const tickets = [
     {
-     method: "POST",  
+    method: "POST",
      path: "/tickets",
      controller: create,
     },

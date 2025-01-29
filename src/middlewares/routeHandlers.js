@@ -6,7 +6,6 @@ const database = new Database()
 
 export function routeHandler( req, res ) {
     const route = routes.find((route) => {
-        console.log(route)
         
         return route.method === req.method && route.path.test(req.url)
         
@@ -14,7 +13,10 @@ export function routeHandler( req, res ) {
 
     if (route) {
         const routeParams = req.url.match(route.path)
-        console.log(routeParams)
+        const{ query, ...params } = routeParams.groups
+       
+        req.params = params
+        req.query = query ? extractQueryParams(query) : {}
          
         return route.controller( {req, res, database} )
     } 
